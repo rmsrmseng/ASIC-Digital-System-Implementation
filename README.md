@@ -221,7 +221,7 @@ The available reports identify the following implementation environment:
 ## 9. Repository Structure
 
 ```text
-Final_System/
+ASIC-Digital-System-Implementation/
 │
 ├── README.md
 │
