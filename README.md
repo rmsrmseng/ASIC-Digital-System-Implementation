@@ -1,4 +1,4 @@
-# Final System – Digital IC Design & Backend Implementation
+# ASIC-Digital-System-Implementation
 
 ## 1. Project Overview
 
