@@ -12,7 +12,7 @@ The project covers the digital frontend design and the complete backend flow, in
 
 ### Final System Architecture
 
-![Final System Architecture](system_architecture.png)
+![Final System Architecture](system_architecture.PNG)
 
 The system consists of three main functional groups:
 
