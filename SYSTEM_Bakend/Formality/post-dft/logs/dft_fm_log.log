@@ -1,0 +1,441 @@
+
+                                 Formality (R)
+
+               Version L-2016.03-SP1 for linux64 - Apr 13, 2016 
+
+                    Copyright (c) 1988 - 2016 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+
+  ** Highlights of Formality (R) Version L-2016.03 **
+   - New alternate verification strategies for resolving inconclusive verifications
+   - Automation for deploying alternate strategies
+   - New command to export the mapping of reference to implementation registers
+   - New capability to combine PG and low power information from db libraries with Verilog functional models
+
+   * Please refer to the Formality Release Notes for details and additional enhancements
+
+Build: 4031317
+Hostname: IC_EDA (RHEL64)
+Current time: Mon Oct 12 03:28:43 2026
+
+Loading db file '/home/synopsys/Formality2016/libraries/syn/gtech.db'
+################################################################################
+# POST-DFT FORMALITY - SYS_TOP
+# Formality L-2016.03-SP1
+################################################################################
+set top_module SYS_TOP
+SYS_TOP
+set impl_top SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3
+SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3
+set synopsys_auto_setup true
+true
+######################## Define Paths #############################
+set RTL_DIR "/home/ICer/Projects/System/rtl"
+/home/ICer/Projects/System/rtl
+set NETLIST "/home/ICer/Projects/System/DFT/netlists/SYS_TOP.v"
+/home/ICer/Projects/System/DFT/netlists/SYS_TOP.v
+set SVF_FILE "/home/ICer/Projects/System/DFT/SYS_TOP.svf"
+/home/ICer/Projects/System/DFT/SYS_TOP.svf
+set LIB_DIR "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys"
+/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys
+set SSLIB "${LIB_DIR}/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
+/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db
+set TTLIB "${LIB_DIR}/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
+/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db
+set FFLIB "${LIB_DIR}/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
+/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db
+######################## Check Files ##############################
+foreach f [list $NETLIST $SVF_FILE $SSLIB $TTLIB $FFLIB] {
+    if {![file exists $f]} {
+        error "Required file not found: $f"
+    }
+}
+######################## RTL File List ############################
+set rtl_files [list]
+lappend rtl_files "${RTL_DIR}/alu.v"
+/home/ICer/Projects/System/rtl/alu.v
+lappend rtl_files "${RTL_DIR}/ASYNC_FIFO.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v
+lappend rtl_files "${RTL_DIR}/CLKDIV_MUX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v
+lappend rtl_files "${RTL_DIR}/CLK_GATE.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v
+lappend rtl_files "${RTL_DIR}/Clock_Divider.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v
+lappend rtl_files "${RTL_DIR}/Data_sampling.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v
+lappend rtl_files "${RTL_DIR}/Data_Synchronizer.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v
+lappend rtl_files "${RTL_DIR}/Deserializer.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v
+lappend rtl_files "${RTL_DIR}/DF_Sync.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v
+lappend rtl_files "${RTL_DIR}/Edge_Bit_Counter.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v
+lappend rtl_files "${RTL_DIR}/FIFO_MEM_CNTRL.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v
+lappend rtl_files "${RTL_DIR}/FIFO_RD.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v
+lappend rtl_files "${RTL_DIR}/FIFO_WR.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v
+lappend rtl_files "${RTL_DIR}/FSM_RX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v
+lappend rtl_files "${RTL_DIR}/FSM_TX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v
+lappend rtl_files "${RTL_DIR}/MUX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v
+lappend rtl_files "${RTL_DIR}/Parity_Calc.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v
+lappend rtl_files "${RTL_DIR}/Parity_Check.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v
+lappend rtl_files "${RTL_DIR}/PULSE_GEN.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v
+lappend rtl_files "${RTL_DIR}/RegFile.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v
+lappend rtl_files "${RTL_DIR}/RST_Synchronizer.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v
+lappend rtl_files "${RTL_DIR}/Serializer.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v
+lappend rtl_files "${RTL_DIR}/Start_Check.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v
+lappend rtl_files "${RTL_DIR}/Stop_Check.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v
+lappend rtl_files "${RTL_DIR}/SYS_CTRL.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v
+lappend rtl_files "${RTL_DIR}/SYS_TOP_dft.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v
+lappend rtl_files "${RTL_DIR}/UART.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v
+lappend rtl_files "${RTL_DIR}/UART_RX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v
+lappend rtl_files "${RTL_DIR}/UART_TX.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v
+lappend rtl_files "${RTL_DIR}/mux_rst.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v /home/ICer/Projects/System/rtl/mux_rst.v
+lappend rtl_files "${RTL_DIR}/mux_ref.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v /home/ICer/Projects/System/rtl/mux_rst.v /home/ICer/Projects/System/rtl/mux_ref.v
+lappend rtl_files "${RTL_DIR}/mux_uart.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v /home/ICer/Projects/System/rtl/mux_rst.v /home/ICer/Projects/System/rtl/mux_ref.v /home/ICer/Projects/System/rtl/mux_uart.v
+lappend rtl_files "${RTL_DIR}/mux_div.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v /home/ICer/Projects/System/rtl/mux_rst.v /home/ICer/Projects/System/rtl/mux_ref.v /home/ICer/Projects/System/rtl/mux_uart.v /home/ICer/Projects/System/rtl/mux_div.v
+lappend rtl_files "${RTL_DIR}/or_clk_gate.v"
+/home/ICer/Projects/System/rtl/alu.v /home/ICer/Projects/System/rtl/ASYNC_FIFO.v /home/ICer/Projects/System/rtl/CLKDIV_MUX.v /home/ICer/Projects/System/rtl/CLK_GATE.v /home/ICer/Projects/System/rtl/Clock_Divider.v /home/ICer/Projects/System/rtl/Data_sampling.v /home/ICer/Projects/System/rtl/Data_Synchronizer.v /home/ICer/Projects/System/rtl/Deserializer.v /home/ICer/Projects/System/rtl/DF_Sync.v /home/ICer/Projects/System/rtl/Edge_Bit_Counter.v /home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v /home/ICer/Projects/System/rtl/FIFO_RD.v /home/ICer/Projects/System/rtl/FIFO_WR.v /home/ICer/Projects/System/rtl/FSM_RX.v /home/ICer/Projects/System/rtl/FSM_TX.v /home/ICer/Projects/System/rtl/MUX.v /home/ICer/Projects/System/rtl/Parity_Calc.v /home/ICer/Projects/System/rtl/Parity_Check.v /home/ICer/Projects/System/rtl/PULSE_GEN.v /home/ICer/Projects/System/rtl/RegFile.v /home/ICer/Projects/System/rtl/RST_Synchronizer.v /home/ICer/Projects/System/rtl/Serializer.v /home/ICer/Projects/System/rtl/Start_Check.v /home/ICer/Projects/System/rtl/Stop_Check.v /home/ICer/Projects/System/rtl/SYS_CTRL.v /home/ICer/Projects/System/rtl/SYS_TOP_dft.v /home/ICer/Projects/System/rtl/UART.v /home/ICer/Projects/System/rtl/UART_RX.v /home/ICer/Projects/System/rtl/UART_TX.v /home/ICer/Projects/System/rtl/mux_rst.v /home/ICer/Projects/System/rtl/mux_ref.v /home/ICer/Projects/System/rtl/mux_uart.v /home/ICer/Projects/System/rtl/mux_div.v /home/ICer/Projects/System/rtl/or_clk_gate.v
+foreach f $rtl_files {
+    if {![file exists $f]} {
+        error "RTL file not found: $f"
+    }
+}
+puts "RTL file count: [llength $rtl_files]"
+RTL file count: 34
+puts "RTL files checked successfully."
+RTL files checked successfully.
+puts "RTL files checked."
+RTL files checked.
+puts "Reference top: $top_module"
+Reference top: SYS_TOP
+puts "Implementation top: $impl_top"
+Implementation top: SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3
+puts "Netlist: $NETLIST"
+Netlist: /home/ICer/Projects/System/DFT/netlists/SYS_TOP.v
+######################## SVF ######################################
+# SVF must be read before the designs.
+set_svf $SVF_FILE
+SVF set to '/home/ICer/Projects/System/DFT/SYS_TOP.svf'.
+1
+######################## Reference Design #########################
+read_verilog -container REF -libname WORK $rtl_files
+Initializing DesignWare ...
+Initialization Complete
+Loading verilog file '/home/ICer/Projects/System/rtl/alu.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/ASYNC_FIFO.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/CLKDIV_MUX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/CLK_GATE.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Clock_Divider.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Data_sampling.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Data_Synchronizer.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Deserializer.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/DF_Sync.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Edge_Bit_Counter.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/FIFO_MEM_CNTRL.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/FIFO_RD.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/FIFO_WR.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/FSM_RX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/FSM_TX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/MUX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Parity_Calc.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Parity_Check.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/PULSE_GEN.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/RegFile.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/RST_Synchronizer.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Serializer.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Start_Check.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/Stop_Check.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/SYS_CTRL.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/SYS_TOP_dft.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/UART.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/UART_RX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/UART_TX.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/mux_rst.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/mux_ref.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/mux_uart.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/mux_div.v'
+Loading verilog file '/home/ICer/Projects/System/rtl/or_clk_gate.v'
+Created container 'REF'
+Current container set to 'REF'
+1
+read_db -container REF [list $SSLIB $TTLIB $FFLIB]
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db'
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db'
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db'
+1
+set_reference_design $top_module
+Reference design set to 'REF:/WORK/SYS_TOP'
+1
+set_top $top_module
+Setting top design to 'REF:/WORK/SYS_TOP'
+Status:   Elaborating design SYS_TOP   ...  
+Status:   Elaborating design mux_rst   ...  
+Status:   Elaborating design mux_uart   ...  
+Status:   Elaborating design mux_ref   ...  
+Status:   Elaborating design mux_div   ...  
+Status:   Elaborating design or_clk_gate   ...  
+Status:   Elaborating design RST_Synchronizer  NUM_STAGES=2 ...  
+Information: Created design named 'RST_Synchronizer_NUM_STAGES2'. (FE-LINK-13)
+Status:   Elaborating design Data_Synchronizer  NUM_STAGES=2, BUS_WIDTH=8 ...  
+Information: Created design named 'Data_Synchronizer_NUM_STAGES2_BUS_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design ASYNC_FIFO  DATA_WIDTH=8, P_SIZE=4, F_DEPTH=8 ...  
+Information: Created design named 'ASYNC_FIFO_DATA_WIDTH8_P_SIZE4_F_DEPTH8'. (FE-LINK-13)
+Status:   Elaborating design FIFO_MEM_CNTRL  A_SIZE=3, D_SIZE=8, F_DEPTH=8, P_SIZE=4 ...  
+Information: Created design named 'FIFO_MEM_CNTRL_A_SIZE3_D_SIZE8_F_DEPTH8_P_SIZE4'. (FE-LINK-13)
+Status:   Elaborating design DF_Sync  DATA_SIZE=4 ...  
+Information: Created design named 'DF_Sync_DATA_SIZE4'. (FE-LINK-13)
+Status:   Elaborating design FIFO_WR   ...  
+Status:   Elaborating design FIFO_RD   ...  
+Status:   Elaborating design PULSE_GEN   ...  
+Status:   Elaborating design Clock_Divider   ...  
+Status:   Elaborating design CLKDIV_MUX   ...  
+Status:   Elaborating design UART   ...  
+Status:   Elaborating design UART_TX  DATA_WIDTH=8 ...  
+Information: Created design named 'UART_TX_DATA_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design FSM_TX   ...  
+Status:   Elaborating design Serializer  WIDTH=8 ...  
+Information: Created design named 'Serializer_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design MUX   ...  
+Status:   Elaborating design Parity_Calc  WIDTH=8 ...  
+Information: Created design named 'Parity_Calc_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design UART_RX  DATA_WIDTH=8 ...  
+Information: Created design named 'UART_RX_DATA_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design FSM_RX  DATA_WIDTH=8 ...  
+Information: Created design named 'FSM_RX_DATA_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design Edge_Bit_Counter   ...  
+Status:   Elaborating design Data_sampling   ...  
+Status:   Elaborating design Deserializer  DATA_WIDTH=8 ...  
+Information: Created design named 'Deserializer_DATA_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design Start_Check   ...  
+Status:   Elaborating design Parity_Check  DATA_WIDTH=8 ...  
+Information: Created design named 'Parity_Check_DATA_WIDTH8'. (FE-LINK-13)
+Status:   Elaborating design Stop_Check   ...  
+Status:   Elaborating design SYS_CTRL   ...  
+Status:   Elaborating design RegFile   ...  
+Status:   Elaborating design alu   ...  
+Status:   Elaborating design CLK_GATE   ...  
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  3 unlinked power cell(s) with unread pg pins.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'REF:/WORK/SYS_TOP'
+Reference design set to 'REF:/WORK/SYS_TOP'
+1
+######################## Implementation Design ###################
+read_verilog -container IMPL -libname WORK $NETLIST
+Loading verilog file '/home/ICer/Projects/System/DFT/netlists/SYS_TOP.v'
+Created container 'IMPL'
+Current container set to 'IMPL'
+1
+read_db -container IMPL [list $SSLIB $TTLIB $FFLIB]
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db'
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db'
+Loading db file '/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db'
+1
+set_implementation_design $impl_top
+Implementation design set to 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+1
+set_top $impl_top
+Setting top design to 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  3 unlinked power cell(s) with unread pg pins.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+Implementation design set to 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+1
+######################## Functional Mode ##########################
+# Constrain scan control inputs to functional mode.
+# Functional mode: disable scan operation
+set_constant REF:/WORK/SYS_TOP/test_mode 0
+Set 'REF:/WORK/SYS_TOP/test_mode' to constant 0
+1
+set_constant IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/test_mode 0
+Set 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/test_mode' to constant 0
+1
+set_constant REF:/WORK/SYS_TOP/SE 0
+Set 'REF:/WORK/SYS_TOP/SE' to constant 0
+1
+set_constant IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/SE 0
+Set 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/SE' to constant 0
+1
+######################## Scan Ports ###############################
+# Keep scan-only ports out of the functional comparison.
+set_dont_verify_points -type port Ref:/WORK/*/SI
+Error: Unknown name: 'Ref:/WORK/*/SI' (FM-036)
+0
+set_dont_verify_points -type port Imp:/WORK/*/SI
+Error: Unknown name: 'Imp:/WORK/*/SI' (FM-036)
+0
+set_dont_verify_points -type port Ref:/WORK/*/So
+Error: Unknown name: 'Ref:/WORK/*/So' (FM-036)
+0
+set_dont_verify_points -type port Imp:/WORK/*/So
+Error: Unknown name: 'Imp:/WORK/*/So' (FM-036)
+0
+######################## Matching #################################
+match
+Reference design is 'REF:/WORK/SYS_TOP'
+Implementation design is 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+Status:  Checking designs...
+    Warning: 3 (12) undriven nets found in reference (implementation) design; see formality.log for list (FM-399)
+Status:  Building verification models...
+Imp top is SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3 ; Ref top is SYS_TOP 
+Status:  Processing Guide Commands...
+    Set don't verify point 'REF:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/So[2]'
+    Set don't verify point 'REF:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/So[1]'
+    Set don't verify point 'REF:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3/So[0]'
+
+***************************** Guidance Summary *****************************
+                                         Status
+Command                 Accepted   Rejected  Unsupported  Unprocessed  Total
+----------------------------------------------------------------------------
+environment         :          2          0          0          0          2
+instance_map        :         33          0          0          0         33
+mark                :         22          0          0          0         22
+multiplier          :          2          0          0          0          2
+reg_constant        :          1          0          0          0          1
+transformation
+   map              :         27          0          0          0         27
+   share            :          4          0          0          0          4
+uniquify            :          2          2          0          0          4
+
+Note: If verification succeeds you can safely ignore unaccepted guidance commands.
+
+SVF files read:
+      /home/ICer/Projects/System/DFT/SYS_TOP.svf
+
+SVF files produced:
+  /home/ICer/Projects/System/Formality/post-dft/formality_svf/
+    svf.txt
+****************************************************************************
+
+Status:  Matching...
+    
+*********************************** Matching Results ***********************************    
+ 377 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 5 Matched primary inputs, black-box outputs    
+ 0(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+ 1(1) Unmatched reference(implementation) unread points    
+****************************************************************************************
+
+1
+######################## Verification #############################
+set successful [verify]
+Reference design is 'REF:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+Implementation design is 'IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3'
+    
+*********************************** Matching Results ***********************************    
+ 377 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 5 Matched primary inputs, black-box outputs    
+ 0(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+ 1(1) Unmatched reference(implementation) unread points    
+****************************************************************************************
+
+Status:  Verifying...
+
+***************************** Synopsys Auto Setup Summary ******************************
+
+!!! Synopsys Auto Setup Mode was enabled. !!!
+!!! Verification results are valid assuming the following setup constraints: !!!
+
+### RTL Interpretation Setup
+   set hdlin_ignore_parallel_case false
+   set hdlin_ignore_full_case false
+   set hdlin_error_on_mismatch_message false
+   set hdlin_ignore_embedded_configuration true
+
+### Undriven Signal Handling Setup
+   set verification_set_undriven_signals synthesis
+
+### Test Logic Setup
+   set verification_verify_directly_undriven_output false
+   For details see report_dont_verify_points and report_constants
+
+
+For further details on Synopsys Auto Setup Mode: Type man synopsys_auto_setup
+****************************************************************************************
+
+
+********************************* Verification Results *********************************
+Verification SUCCEEDED
+   ATTENTION: synopsys_auto_setup mode was enabled.
+              See Synopsys Auto Setup Summary for details.
+----------------------------------------------------------
+ Reference design: REF:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3
+ Implementation design: IMPL:/WORK/SYS_TOP_DATA_WIDTH8_RF_ADDR4_NUM_OF_CHAINS3
+ 377 Passing compare points
+----------------------------------------------------------------------------------------
+Matched Compare Points     BBPin    Loop   BBNet     Cut    Port     DFF     LAT   TOTAL
+----------------------------------------------------------------------------------------
+Passing (equivalent)           0       0       0       0       3     373       1     377
+Failing (not equivalent)       0       0       0       0       0       0       0       0
+Not Compared
+  Don't verify                 0       0       0       0       3       0       0       3
+****************************************************************************************
+1
+if {!$successful} {
+    diagnose
+    analyze_points -failing
+}
+######################## Reports ##################################
+file mkdir reports
+report_passing_points > reports/passing_points.rpt
+report_failing_points > reports/failing_points.rpt
+report_aborted_points > reports/aborted_points.rpt
+report_unverified_points > reports/unverified_points.rpt
+######################## Final Status #############################
+if {$successful} {
+    puts "POST-DFT FORMALITY: VERIFY PASSED"
+} else {
+    puts "POST-DFT FORMALITY: VERIFY FAILED"
+}
+POST-DFT FORMALITY: VERIFY PASSED
+exit
+
+Maximum memory usage for this session: 479184 KB
+CPU usage for this session: 13.88 seconds
+Current time: Mon Oct 12 03:28:55 2026
+Elapsed time: 13 seconds
+
+Thank you for using Formality (R)!

@@ -1,0 +1,97 @@
+
+
+current_design SYS_TOP
+
+
+#========================================================
+# CLOCKS
+#========================================================
+
+clock -name SYS_TOP.REF_CLK \
+      -period 20.0 \
+      -edge {0.0 10.0} \
+      -domain REF_DOMAIN \
+      -tag REF_CLK
+
+clock -name SYS_TOP.UART_CLK \
+      -period 271.267 \
+      -edge {0.0 135.6335} \
+      -domain UART_DOMAIN \
+      -tag UART_CLK
+
+clock -name SYS_TOP.UART_TX_CLK \
+      -period 8680.56 \
+      -edge {0.0 4340.28} \
+      -domain UART_DOMAIN \
+      -tag UART_TX_CLK
+
+clock -name SYS_TOP.UART_RX_CLK \
+      -period 8680.56 \
+      -edge {0.0 4340.28} \
+      -domain UART_DOMAIN \
+      -tag UART_RX_CLK
+
+
+#========================================================
+# RESET
+#========================================================
+
+reset -name SYS_TOP.RST_N -value 0
+
+
+#========================================================
+# QUASI STATIC CONFIGURATION
+#========================================================
+
+quasi_static -name SYS_TOP.U0_RegFile.regArr[2][7:0]
+
+quasi_static -name SYS_TOP.U0_RegFile.regArr[3][7:0]
+
+
+#========================================================
+# ASYNC FIFO
+#========================================================
+# FIFO memory used for CDC data transfer
+#
+# W_CLK = REF_CLK
+# R_CLK = UART_TX_CLK
+#
+# Gray-coded write/read pointers are synchronized
+# between the two clock domains.
+#========================================================
+
+fifo -memory "SYS_TOP.U0_ASYNC_FIFO.u_FIFO_MEM_CNTRL.FIFO_MEM"
+
+
+#========================================================
+# INPUTS
+#========================================================
+
+input -name SYS_TOP.REF_CLK \
+       -clock REF_CLK
+
+input -name SYS_TOP.UART_CLK \
+       -clock UART_CLK
+
+input -name SYS_TOP.RST_N \
+       -clock REF_CLK
+
+input -name SYS_TOP.RST_N \
+       -clock UART_CLK
+
+input -name SYS_TOP.UART_RX_IN \
+       -clock UART_RX_CLK
+
+
+#========================================================
+# OUTPUTS
+#========================================================
+
+output -name SYS_TOP.UART_TX_O \
+        -clock UART_TX_CLK
+
+output -name SYS_TOP.parity_error \
+        -clock UART_RX_CLK
+
+output -name SYS_TOP.framing_error \
+        -clock UART_RX_CLK
